@@ -174,7 +174,7 @@ export class ZSON {
 		else {
 			result.type = 'zson';
 			result.setRoot(thing);
-			return JSON.stringify(result, undefined, "\t");
+			return JSON.stringify(result);
 		}
 	}
 
