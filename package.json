@@ -2,14 +2,13 @@
   "name": "zron",
   "version": "0.2.0",
   "description": "ZornCo Recursive Object Notation - JSON with circular references, functions, RegExp objects, and Date objects",
-  "main": "bundle.js",
+  "main": "index.js",
   "scripts": {
     "clean": "rimraf spec/tests dist",
     "compile": "npm run clean && tsc -p tsconfig.main.json",
-    "preinstall": "npm run compile",
     "test": "npm run clean && tsc -p tsconfig.spec.json && jasmine",
     "start": "npm run compile",
-    "prepublish": "npm run compile"
+    "prepublish": "bash prepublish.sh"
   },
   "keywords": [
     "json",
