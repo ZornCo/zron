@@ -5,7 +5,7 @@
   "main": "bundle.js",
   "scripts": {
     "clean": "rimraf spec/tests dist",
-    "compile": "npm run clean && tsc",
+    "compile": "npm run clean && tsc -p tsconfig.main.json",
     "preinstall": "npm run compile",
     "test": "npm run clean && tsc -p tsconfig.spec.json && jasmine"
   },

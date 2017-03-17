@@ -1,6 +1,12 @@
 {
-	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
+		"target": "es5",
+		"lib": ["es6"],
+		"module": "commonjs",
+		"declaration": true,
+		"removeComments": true,
+		"experimentalDecorators": true,
+		"sourceMap": true,
 		"rootDir": "src",
 		"outDir": "spec/tests"
 	},
