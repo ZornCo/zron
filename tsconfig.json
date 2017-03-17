@@ -8,7 +8,10 @@
 		"experimentalDecorators": true,
 		"sourceMap": true,
 		"rootDir": "src",
-		"outDir": "/dev/null"
+		"outDir": "/dev/null",
+		"typeRoots": [
+			"node_modules/@types"
+		]
 	},
 	"exclude": [
 		"node_modules"
