@@ -50,6 +50,9 @@ export class ZRON {
 			return;
 		}
 		for (let key of Object.keys(obj)) {
+			if (obj[key] === undefined || obj[key] === null) {
+				continue;
+			}
 			if (typeof obj[key] === 'object' && !this.objMap.has(obj[key])) {
 				let uid = this.genUid();
 				this.objMap.set(obj[key], uid);
