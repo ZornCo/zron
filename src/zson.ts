@@ -73,10 +73,18 @@ export class ZSON {
 					};
 				}
 				else {
-					this.uidMap[uid] = {
-						type: 'object',
-						object: Object.assign({}, obj[key]),
-					};
+					if (Array.isArray(obj[key])) {
+						this.uidMap[uid] = {
+							type: 'object',
+							object: Object.assign([], obj[key]),
+						}
+					}
+					else {
+						this.uidMap[uid] = {
+							type: 'object',
+							object: Object.assign({}, obj[key]),
+						};
+					}
 					this.mapObjs(obj[key]);
 				}
 			}
