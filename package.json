@@ -1,6 +1,6 @@
 {
   "name": "zron",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "ZornCo Recursive Object Notation - JSON with circular references, functions, RegExp objects, and Date objects",
   "main": "index.js",
   "scripts": {
