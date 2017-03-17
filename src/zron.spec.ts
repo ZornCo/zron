@@ -8,6 +8,8 @@ interface Obj {
 	recurse: Obj;
 }
 interface Test {
+	someText: string;
+	someNumber: number;
 	obj: Obj;
 	arr: Array<number>;
 	func: Function;
@@ -29,6 +31,8 @@ let arr = [1, 2, 3];
 let date = new Date();
 let regex = /.*test.*/ig;
 let test: Test = {
+	someText: 'this is text',
+	someNumber: 1337,
 	obj,
 	arr,
 	func,
@@ -45,6 +49,8 @@ describe('ZRON', function() {
 		expect(zron).toBeTruthy();
 
 		it('should not change value on passed obj', function() {
+			expect(test.someText).toBe('this is text');
+			expect(test.someNumber).toBe(1337);
 			expect(test.obj).toBe(obj);
 			expect(test.obj.something).toBe(1);
 			expect(test.obj.somethingElse).toBe(2);
@@ -65,6 +71,8 @@ describe('ZRON', function() {
 	it('should parse', function() {
 		let zron = ZRON.stringify(test);
 		let parsed: Test = ZRON.parse(zron);
+		expect(parsed.someText).toBe('this is text');
+		expect(parsed.someNumber).toBe(1337);
 		expect(parsed.obj.something).toBe(1);
 		expect(parsed.obj.somethingElse).toBe(2);
 		expect(parsed.obj.recurse).toBe(parsed.obj);

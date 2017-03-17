@@ -94,7 +94,7 @@ var parsed: Test = ZRON.parse(serialized);
 		"4": {
 			"type": "date",
 			"date": {
-				"timestamp": 1489774183274
+				"timestamp": 1489774609756
 			}
 		},
 		"5": {
@@ -106,6 +106,8 @@ var parsed: Test = ZRON.parse(serialized);
 		}
 	},
 	"data": {
+		"someText": "this is text",
+		"someNumber": 1337,
 		"obj.ZRONUid": "1",
 		"arr.ZRONUid": "2",
 		"func.ZRONUid": "3",
