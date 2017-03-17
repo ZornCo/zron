@@ -6,6 +6,11 @@
 		"declaration": true,
 		"removeComments": true,
 		"experimentalDecorators": true,
-		"sourceMap": true
-	}
+		"sourceMap": true,
+		"rootDir": "src",
+		"outDir": "dist"
+	},
+	"exclude": [
+		"node_modules"
+	]
 }

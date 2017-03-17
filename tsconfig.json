@@ -1,11 +1,19 @@
 {
-	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
+		"target": "es5",
+		"lib": ["es6"],
+		"module": "commonjs",
+		"declaration": true,
+		"removeComments": true,
+		"experimentalDecorators": true,
+		"sourceMap": true,
 		"rootDir": "src",
-		"outDir": "dist"
+		"outDir": "/dev/null",
+		"typeRoots": [
+			"node_modules/@types"
+		]
 	},
 	"exclude": [
-		"node_modules",
-		"**/*.spec.ts"
+		"node_modules"
 	]
 }
