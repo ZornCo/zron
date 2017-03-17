@@ -16,6 +16,7 @@ export interface ZObj {
 
 export class ZRON {
 	public type: 'json' | 'zron' | 'undefined';
+	public isArray = false;
 	public uidMap: {[uid: string]: ZObj} = {};
 	public data: Object | string = {};
 	private objMap = new Map<Object, string>();
@@ -36,6 +37,7 @@ export class ZRON {
 	public valueOf(): Object {
 		return {
 			type: this.type,
+			isArray: this.isArray,
 			uidMap: this.uidMap,
 			data: this.data,
 		};
@@ -158,10 +160,21 @@ export class ZRON {
 				delete this.data[key];
 			}
 		}
+		if (this.isArray) {
+			let origData = this.data;
+			this.data = [];
+			(this.data as any[]).length = Object.keys(origData).length;
+			for (let key of Object.keys(origData)) {
+				this.data[+key] = origData[key];
+			}
+		}
 		this.uidMap = {};
 	}
 
 	public setRoot(obj: Object): void {
+		if (Array.isArray(obj)) {
+			this.isArray = true;
+		}
 		this.data = Object.assign({}, obj);
 		this.objMap.set(obj, '0');
 		this.mapObjs(obj);
