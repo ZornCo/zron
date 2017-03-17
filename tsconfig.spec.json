@@ -12,6 +12,7 @@
 	},
 	"exclude": [
 		"node_modules",
+		"index.d.ts",
 		"!**/*.spec.ts"
 	]
 }
