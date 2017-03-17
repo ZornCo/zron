@@ -7,7 +7,7 @@ Example:
 ### JavaScript (Node.JS)
 
 ```javascript
-var ZSON = require('zson').ZSON;
+var ZRON = require('zron').ZRON;
 
 var obj = {
 	something: 1,
@@ -21,8 +21,8 @@ var test: Test = {
 	regex: /.*test.*/ig,
 };
 
-var serialized = ZSON.stringify(test);
-var parsed = ZSON.parse(serialized);
+var serialized = ZRON.stringify(test);
+var parsed = ZRON.parse(serialized);
 
 // `parsed` should now be equivalent to `test`
 ```
@@ -30,7 +30,7 @@ var parsed = ZSON.parse(serialized);
 ### TypeScript (Node.JS)
 
 ```typescript
-import { ZSON } from 'zson';
+import { ZRON } from 'zron';
 
 interface Obj {
 	something: 1;
@@ -57,8 +57,8 @@ let test: Test = {
 	regex: /.*test.*/ig,
 };
 
-let serialized = ZSON.stringify(test);
-var parsed: Test = ZSON.parse(serialized);
+let serialized = ZRON.stringify(test);
+var parsed: Test = ZRON.parse(serialized);
 
 // `parsed` should now implement the `Test` interface and be equivalent to `test`
 ```
