@@ -29,7 +29,7 @@ var parsed = ZRON.parse(serialized);
 
 ### TypeScript (Node.JS)
 
-```typescript
+```javascript
 import { ZRON } from 'zron';
 
 interface Obj {
