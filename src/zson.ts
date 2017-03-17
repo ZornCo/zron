@@ -121,7 +121,14 @@ export class ZSON {
 			if (zObj.type === 'object') {
 				for (let key of Object.keys(zObj.raw)) {
 					if (key.endsWith(ZSON.UID_SUFFIX)) {
-						zObj.raw[key.substr(0, key.length - ZSON.UID_SUFFIX.length)] = this.uidMap[zObj.raw[key]].raw;
+						let origKey = key.substr(0, key.length - ZSON.UID_SUFFIX.length);
+						let uid = zObj.raw[key];
+						if (uid === '0') {
+							zObj.raw[origKey] = this.data;
+						}
+						else {
+							zObj.raw[origKey] = this.uidMap[uid].raw;
+						}
 						delete zObj.raw[key];
 					}
 				}
@@ -129,7 +136,14 @@ export class ZSON {
 		}
 		for (let key of Object.keys(this.data)) {
 			if (key.endsWith(ZSON.UID_SUFFIX)) {
-				this.data[key.substr(0, key.length - ZSON.UID_SUFFIX.length)] = this.uidMap[this.data[key]].raw;
+				let origKey = key.substr(0, key.length - ZSON.UID_SUFFIX.length);
+				let uid = this.data[key];
+				if (uid === '0') {
+					this.data[origKey] = this.data;
+				}
+				else {
+					this.data[origKey] = this.uidMap[uid].raw;
+				}
 				delete this.data[key];
 			}
 		}
@@ -138,13 +152,15 @@ export class ZSON {
 
 	public setRoot(obj: Object): void {
 		this.data = Object.assign({}, obj);
-		this.mapObjs({obj});
+		this.objMap.set(obj, '0');
+		this.mapObjs(obj);
 
 		this.objMap.forEach((uid, origObj) => {
 			for (let key of Object.keys(origObj)) {
-				if (this.objMap.has(origObj[key])) {
+				if (this.objMap.has(origObj[key]) && uid !== '0') {
+					let childUid = this.objMap.get(origObj[key]);
 					let type = this.uidMap[uid]['type'];
-					this.uidMap[uid][type][key + ZSON.UID_SUFFIX] = this.objMap.get(origObj[key]);
+					this.uidMap[uid][type][key + ZSON.UID_SUFFIX] = childUid;
 					delete this.uidMap[uid][type][key];
 				}
 			}
