@@ -1,13 +1,15 @@
 {
-  "name": "zson",
-  "version": "0.1.0",
-  "description": "Zorn Serialized Object Notation - JSON with circular references, functions, RegExp objects, and Date objects",
+  "name": "zron",
+  "version": "0.2.0",
+  "description": "ZornCo Recursive Object Notation - JSON with circular references, functions, RegExp objects, and Date objects",
   "main": "bundle.js",
   "scripts": {
     "clean": "rimraf spec/tests dist",
     "compile": "npm run clean && tsc -p tsconfig.main.json",
     "preinstall": "npm run compile",
-    "test": "npm run clean && tsc -p tsconfig.spec.json && jasmine"
+    "test": "npm run clean && tsc -p tsconfig.spec.json && jasmine",
+    "start": "npm run compile",
+    "prepublish": "npm run compile"
   },
   "keywords": [
     "json",
@@ -18,6 +20,13 @@
   ],
   "author": "ZornCo LLC",
   "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZornCo/zron.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZornCo/zron/issues"
+  },
   "devDependencies": {
     "@types/jasmine": "2.5.46",
     "@types/uuid": "2.0.29",

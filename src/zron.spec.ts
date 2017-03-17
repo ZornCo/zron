@@ -1,6 +1,6 @@
 import 'jasmine';
 
-import { ZSON } from './index';
+import { ZRON } from './index';
 
 interface Obj {
 	something: 1;
@@ -38,11 +38,11 @@ let test: Test = {
 };
 test.recurse = test;
 
-describe('ZSON', function() {
+describe('ZRON', function() {
 	it('should stringify', function() {
-		let zson = ZSON.stringify(test);
+		let zron = ZRON.stringify(test);
 
-		expect(zson).toBeTruthy();
+		expect(zron).toBeTruthy();
 
 		it('should not change value on passed obj', function() {
 			expect(test.obj).toBe(obj);
@@ -63,8 +63,8 @@ describe('ZSON', function() {
 	});
 
 	it('should parse', function() {
-		let zson = ZSON.stringify(test);
-		let parsed: Test = ZSON.parse(zson);
+		let zron = ZRON.stringify(test);
+		let parsed: Test = ZRON.parse(zron);
 		expect(parsed.obj.something).toBe(1);
 		expect(parsed.obj.somethingElse).toBe(2);
 		expect(parsed.obj.recurse).toBe(parsed.obj);

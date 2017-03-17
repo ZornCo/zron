@@ -14,14 +14,14 @@ export interface ZObj {
 	raw?: any;
 }
 
-export class ZSON {
-	public type: 'json' | 'zson' | 'undefined';
+export class ZRON {
+	public type: 'json' | 'zron' | 'undefined';
 	public uidMap: {[uid: string]: ZObj} = {};
 	public data: Object | string = {};
 	private objMap = new Map<Object, string>();
 	private count = 0;
 
-	static UID_SUFFIX = '.ZSONUid';
+	static UID_SUFFIX = '.ZRONUid';
 
 	constructor() {}
 
@@ -128,8 +128,8 @@ export class ZSON {
 			let zObj: ZObj = this.uidMap[uid];
 			if (zObj.type === 'object') {
 				for (let key of Object.keys(zObj.raw)) {
-					if (key.endsWith(ZSON.UID_SUFFIX)) {
-						let origKey = key.substr(0, key.length - ZSON.UID_SUFFIX.length);
+					if (key.endsWith(ZRON.UID_SUFFIX)) {
+						let origKey = key.substr(0, key.length - ZRON.UID_SUFFIX.length);
 						let uid = zObj.raw[key];
 						if (uid === '0') {
 							zObj.raw[origKey] = this.data;
@@ -143,8 +143,8 @@ export class ZSON {
 			}
 		}
 		for (let key of Object.keys(this.data)) {
-			if (key.endsWith(ZSON.UID_SUFFIX)) {
-				let origKey = key.substr(0, key.length - ZSON.UID_SUFFIX.length);
+			if (key.endsWith(ZRON.UID_SUFFIX)) {
+				let origKey = key.substr(0, key.length - ZRON.UID_SUFFIX.length);
 				let uid = this.data[key];
 				if (uid === '0') {
 					this.data[origKey] = this.data;
@@ -168,7 +168,7 @@ export class ZSON {
 				if (this.objMap.has(origObj[key]) && uid !== '0') {
 					let childUid = this.objMap.get(origObj[key]);
 					let type = this.uidMap[uid]['type'];
-					this.uidMap[uid][type][key + ZSON.UID_SUFFIX] = childUid;
+					this.uidMap[uid][type][key + ZRON.UID_SUFFIX] = childUid;
 					delete this.uidMap[uid][type][key];
 				}
 			}
@@ -176,14 +176,14 @@ export class ZSON {
 
 		for (let key of Object.keys(this.data)) {
 			if (this.objMap.has(this.data[key])) {
-				this.data[key + ZSON.UID_SUFFIX] = this.objMap.get(this.data[key]);
+				this.data[key + ZRON.UID_SUFFIX] = this.objMap.get(this.data[key]);
 				delete this.data[key];
 			}
 		}
 	}
 
 	static stringify(thing: any): string {
-		let result = new ZSON();
+		let result = new ZRON();
 
 		if (typeof thing !== 'object') {
 			if (thing === undefined) {
@@ -196,7 +196,7 @@ export class ZSON {
 			return JSON.stringify(result);
 		}
 		else {
-			result.type = 'zson';
+			result.type = 'zron';
 			result.setRoot(thing);
 			return JSON.stringify(result);
 		}
@@ -204,11 +204,11 @@ export class ZSON {
 
 	static parse(str: string): any {
 		let unwrapped: any = JSON.parse(str);
-		let zson = new ZSON();
+		let zron = new ZRON();
 		for (let key of Object.keys(unwrapped)) {
-			zson[key] = unwrapped[key];
+			zron[key] = unwrapped[key];
 		}
-		zson.unmapObjs();
-		return zson.data;
+		zron.unmapObjs();
+		return zron.data;
 	}
 }
