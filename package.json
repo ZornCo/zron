@@ -34,5 +34,7 @@
     "rimraf": "2.6.1",
     "typescript": "2.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "source-map-support": "0.4.13"
+  }
 }
